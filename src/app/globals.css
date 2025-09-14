@@ -1,26 +1,84 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@plugin './hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #000000;
+	--foreground: #ededed;
+	--muted: #8b8b8b;
+}
+
+@theme {
+	--breakpoint-xs: 24rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
+	--color-muted: var(--muted);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	scrollbar-width: thin;
+	scrollbar-color: var(--muted) #000;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--muted);
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: #000;
+}
+
+.screen-max-width {
+	margin-inline-start: auto;
+	margin-inline-end: auto;
+	position: relative;
+	max-width: 1120px;
+}
+
+@layer utilities {
+	.flex-center {
+		@apply flex items-center justify-center;
+	}
+
+	.hero-height {
+		@apply max-h-[min(1400px,calc(100vh-150px))];
+	}
+
+	.hero-title {
+		@apply text-center font-semibold text-7xl;
+	}
+
+	.section-text {
+		@apply md:max-w-[1200px] max-w-[420px] md:mx-40 mx-4 flex md:items-center flex-col;
+	}
+
+	.section-title {
+		@apply font-semibold lg:text-2xl md:text-xl text-lg bg-clip-text text-transparent bg-gradient-to-b from-[#AAA38E] to-[#837855] md:text-center opacity-0 translate-y-5;
+	}
+
+	.section-heading {
+		@apply font-semibold lg:text-[80px] md:text-[56px] text-[40px] text-white md:text-center lg:leading-20 md:leading-15 leading-12 pt-4 opacity-0 translate-y-5;
+	}
+
+	.section-subheading {
+		@apply font-semibold md:text-xl text-lg text-muted md:text-center pt-6 max-w-[800px] opacity-0 translate-y-5;
+	}
+
+	.video-width {
+		@apply max-w-[1000px] w-full;
+	}
 }
