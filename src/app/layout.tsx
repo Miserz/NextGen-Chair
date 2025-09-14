@@ -1,11 +1,10 @@
-import './polyfills.client'
-
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 
 import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/seo.constants'
 
 import Head from 'next/head'
+import Script from 'next/script'
 import './globals.css'
 import { Providers } from './providers'
 
@@ -61,6 +60,9 @@ export default function RootLayout({
 				<link rel='manifest' href='/site.webmanifest' />
 			</Head>
 			<html lang='en'>
+				<head>
+					<Script src='/polyfills.js' strategy='beforeInteractive' />
+				</head>
 				<body className={montserratFont.className}>
 					<Providers>{children}</Providers>
 				</body>
