@@ -1,5 +1,6 @@
 'use client'
 import { ModalRules } from '@/components/ui/ModalRules'
+import { PUBLIC_URL } from '@/config/url.config'
 import { cn } from '@/utils/utils'
 import { Button, Link as LinkHeroUi } from '@heroui/react'
 import gsap from 'gsap'
@@ -118,6 +119,7 @@ export function Header() {
 
 					<div className='flex gap-2 pt-8'>
 						<LinkHeroUi
+							href={PUBLIC_URL.termsOfUse()}
 							underline='hover'
 							className='cursor-pointer font-medium'
 							isExternal

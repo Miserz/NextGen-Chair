@@ -9,3 +9,5 @@ export const ergonomicsFolder = '/assets/images/ergonomics'
 export const ergonomicsFrames = 30
 export const generalViewFolder = '/assets/images/general-view'
 export const generalViewFrames = 30
+
+export const logo = '/assets/images/logo.svg'

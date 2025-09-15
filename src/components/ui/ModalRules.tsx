@@ -35,8 +35,8 @@ export function ModalRules({ size }: ModalRulesProps) {
 						</h2>
 					</ModalHeader>
 					<ModalBody className='text-sm flex gap-6'>
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Гарантия</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>Гарантия</h2>
 							<p>
 								Стул будет ремонтироваться и улучшаться в течение 70 дней с
 								момента изготовления (исключение: необратимые поломки, например
@@ -45,14 +45,14 @@ export function ModalRules({ size }: ModalRulesProps) {
 								либо для модернизации, либо для утилизации (решение принимает
 								главный по стулу).
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Правила использования</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>Правила использования</h2>
 							<div className='space-y-2'>
-								<h3 className='font-bold text-base'>Строго запрещено:</h3>
+								<h3 className='font-semibold text-base'>Строго запрещено:</h3>
 								<ul className='list-disc list-inside text-sm space-y-1'>
 									<li>кататься на стуле со скоростью более 5 км/ч;</li>
 									<li>кататься на стуле вдвоём или более человек;</li>
@@ -72,7 +72,7 @@ export function ModalRules({ size }: ModalRulesProps) {
 							</div>
 
 							<div className='space-y-2'>
-								<h3 className='font-bold text-base'>Разрешено:</h3>
+								<h3 className='font-semibold text-base'>Разрешено:</h3>
 								<ul className='list-disc list-inside text-sm space-y-1'>
 									<li>
 										спокойно и аккуратно перемещаться на стуле во время
@@ -80,23 +80,23 @@ export function ModalRules({ size }: ModalRulesProps) {
 									</li>
 								</ul>
 							</div>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Статус собственности</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>Статус собственности</h2>
 							<p>
 								Стул никак не относится к школьному имуществу или собственности
 								школы; все запчасти и сам стул приобретались отдельно физическим
 								лицом.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>
 								О принадлежности к школьным вещам
 							</h2>
 							<p>
@@ -104,63 +104,67 @@ export function ModalRules({ size }: ModalRulesProps) {
 								так как имеет место для хранения школьных принадлежностей (ручек
 								и т. п.), и в настоящий момент используется для их хранения.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Просьба о возврате</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>Просьба о возврате</h2>
 							<p>
 								Просьба не забирать стул! Любое изъятие стула без передачи его
 								создателю является хищением и подпадает под статью 158 УК РФ.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Запрет на порчу</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>Запрет на порчу</h2>
 							<p>
 								Запрещено портить стул: отрывать надписи и ломать конструкцию. В
 								случае умышленной порчи стула действия подпадают под статью 167
 								УК РФ.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Полномочия ответственного</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>
+								Полномочия ответственного
+							</h2>
 							<p>
 								Главный по стулу оставляет за собой право изъять стул у водителя
 								без объяснения причины.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Изменение правил</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>Изменение правил</h2>
 							<p>
 								Правила могут изменяться со временем; просим ознакомляться с
 								правилами перед каждой поездкой.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<div className='space-y-2'>
-							<h2 className='font-bold text-lg'>Отказ от ответственности</h2>
+						<section className='space-y-2'>
+							<h2 className='font-semibold text-lg'>
+								Отказ от ответственности
+							</h2>
 							<p>
 								Создатели «Стул на колесиках 4.0» не несут ответственности за
 								травмы и увечья, полученные водителем стула или третьими лицами
 								во время эксплуатации стула.
 							</p>
-						</div>
+						</section>
 
 						<Divider />
 
-						<h2 className='font-bold text-lg text-center py-4'>
+						<h2 className='font-semibold text-lg text-center py-4'>
 							Приятного вождения «Стул на колесиках 4.0»!
 						</h2>
 					</ModalBody>
