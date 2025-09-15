@@ -2,8 +2,8 @@
 
 import { heroVideo } from '@/utils'
 import { useGSAP } from '@gsap/react'
-import { Button } from '@heroui/react'
 import gsap from 'gsap'
+import { ModalRules } from './ModalRules'
 
 export function Hero({ id }: { id: string }) {
 	useGSAP(() => {
@@ -28,9 +28,7 @@ export function Hero({ id }: { id: string }) {
 				id='cta'
 				className='flex flex-col items-center opacity-0 translate-y-20'
 			>
-				<Button radius='full' color='primary'>
-					Правила
-				</Button>
+				<ModalRules size='lg' />
 				<p className='font-normal text-sm pt-5 text-muted text-center p-2'>
 					Перед использованием ознакомьтесь с правилами
 				</p>

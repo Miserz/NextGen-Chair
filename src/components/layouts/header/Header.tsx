@@ -1,4 +1,5 @@
 'use client'
+import { ModalRules } from '@/components/ui/ModalRules'
 import { cn } from '@/utils/utils'
 import { Button, Link as LinkHeroUi } from '@heroui/react'
 import gsap from 'gsap'
@@ -87,9 +88,7 @@ export function Header() {
 						>
 							Больше
 						</Button>
-						<Button size='sm' radius='full' color='primary'>
-							Правила
-						</Button>
+						<ModalRules size='sm' />
 					</div>
 				</nav>
 
