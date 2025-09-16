@@ -60,26 +60,41 @@ export function ImageSequence({
 
 	useEffect(() => {
 		const currentFrame = (index: number) =>
-			`${folder}/frame_${index.toString().padStart(4, '0')}.jpg`
+			`${folder}/frame_${index.toString().padStart(4, '0')}.avif`
 
 		const images: (HTMLImageElement | null)[] = new Array(frames).fill(null)
 		const imageSeq = { frame: 0 }
 		const context = canvasRef.current!.getContext('2d')!
 
 		const render = () => {
-			let img = images[imageSeq.frame]
-			// если кадр ещё не загрузился, ищем ближайший загруженный
-			if (!img) {
-				for (let i = imageSeq.frame; i >= 0; i--) {
-					if (images[i]) {
-						img = images[i]
-						break
-					}
-				}
-			}
-			if (!img) return
+			const frameIndex = Math.floor(imageSeq.frame)
+			const nextIndex = Math.min(frameIndex + 1, frames - 1)
+			const progress = imageSeq.frame - frameIndex
+
+			const img1 = images[frameIndex]
+			const img2 = images[nextIndex]
+
+			if (!img1) return
+
 			context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-			context.drawImage(img, 0, 0, context.canvas.width, context.canvas.height)
+
+			// Рисуем текущий кадр с уменьшающейся прозрачностью
+			context.drawImage(img1, 0, 0, context.canvas.width, context.canvas.height)
+
+			// Рисуем следующий кадр поверх с нарастающей прозрачностью
+			if (img2) {
+				context.globalAlpha = progress
+				context.drawImage(
+					img2,
+					0,
+					0,
+					context.canvas.width,
+					context.canvas.height
+				)
+			}
+
+			// Сбрасываем прозрачность
+			context.globalAlpha = 1
 		}
 
 		// Загружаем первый кадр сразу
@@ -90,24 +105,58 @@ export function ImageSequence({
 			render()
 		}
 
-		// Лениво подгружаем остальные кадры
-		let i = 1
-		const preloadNext = () => {
-			if (i >= frames) return
-			const img = new Image()
-			img.src = currentFrame(i)
-			img.onload = () => {
-				images[i] = img
-				i++
-				// подгружаем следующий кадр асинхронно
-				requestIdleCallback(preloadNext)
+		// Ленивая подгрузка при входе в viewport
+		const preloadFrames = () => {
+			// Сначала загружаем каждый 5-й кадр
+			const step1 = () => {
+				for (let i = 5; i < frames; i += 5) {
+					const img = new Image()
+					img.src = currentFrame(i)
+					img.onload = () => {
+						images[i] = img
+						render()
+					}
+				}
 			}
+
+			// Потом оставшиеся
+			const step2 = () => {
+				const loadNext = (i: number) => {
+					if (i >= frames) return
+					if (images[i]) return loadNext(i + 1) // уже загружен
+					const img = new Image()
+					img.src = currentFrame(i)
+					img.onload = () => {
+						images[i] = img
+						render()
+						requestIdleCallback(() => loadNext(i + 1))
+					}
+				}
+				requestIdleCallback(() => loadNext(1))
+			}
+
+			step1()
+			step2()
 		}
-		requestIdleCallback(preloadNext)
+
+		// Запускаем подгрузку только при попадании секции в viewport
+		const observer = new IntersectionObserver(
+			entries => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						preloadFrames()
+						observer.disconnect()
+					}
+				})
+			},
+			{ rootMargin: '500px' }
+		)
+
+		if (root.current) observer.observe(root.current)
 
 		gsap.to(imageSeq, {
 			frame: frames - 1,
-			snap: 'frame',
+			// snap: 'frame',
 			ease: 'none',
 			scrollTrigger: {
 				trigger: root.current,
@@ -121,6 +170,7 @@ export function ImageSequence({
 
 		return () => {
 			ScrollTrigger.getAll().forEach(t => t.kill())
+			observer.disconnect()
 		}
 	}, [folder, frames, start, end, pin])
 
@@ -128,7 +178,7 @@ export function ImageSequence({
 		<section
 			ref={root}
 			id={id}
-			className='w-full relative flex-center flex-col py-40'
+			className='w-full relative flex-center flex-col sm:py-40 py-25'
 		>
 			{(title || heading || subheading) && (
 				<div className='section-text'>
